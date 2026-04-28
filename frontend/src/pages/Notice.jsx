@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { noticeAPI } from '../services/api';
-import { useToast } from '../context/ToastContext';
+import { useToast } from '../context/useToast';
 
 const EMPTY = { title:'', content:'', category:'General', audience:'All', publishedDate: new Date().toISOString().split('T')[0], isActive:true };
 const CATEGORIES = ['General','Exam','Holiday','Event','Urgent'];

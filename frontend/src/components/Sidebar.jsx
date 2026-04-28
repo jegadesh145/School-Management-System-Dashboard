@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const navItems = [
   { label: 'Dashboard',  path: '/',           icon: '🏠', section: 'MAIN' },
@@ -18,56 +18,70 @@ const navItems = [
 
 const sections = ['MAIN', 'ACADEMIC', 'RESOURCES', 'OTHERS'];
 
-export default function Sidebar({ isOpen, setIsOpen }) {
-  const location = useLocation();
+export default function Sidebar({ isOpen = false, setIsOpen = () => {} }) {
 
   return (
     <>
-      <div className={`sidebar-overlay ${isOpen ? 'show' : ''}`} onClick={() => setIsOpen(false)}></div>
+      {/* Overlay */}
+      <div
+        className={`sidebar-overlay ${isOpen ? 'show' : ''}`}
+        onClick={() => setIsOpen(false)}
+      ></div>
+
+      {/* Sidebar */}
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
-      {/* Logo */}
-      <div className="sidebar-logo">
-        <div className="logo-icon">S</div>
-        <div>
-          <div className="logo-text">SchoolMS</div>
-          <div className="logo-sub">Management System</div>
+        
+        {/* Logo */}
+        <div className="sidebar-logo">
+          <div className="logo-icon">S</div>
+          <div>
+            <div className="logo-text">SchoolMS</div>
+            <div className="logo-sub">Management System</div>
+          </div>
         </div>
-      </div>
 
-      {/* Navigation */}
-      <nav className="sidebar-nav">
-        {sections.map(section => {
-          const items = navItems.filter(i => i.section === section);
-          return (
-            <div key={section}>
-              <div className="nav-section-label">{section}</div>
-              {items.map(item => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  end={item.path === '/'}
-                  onClick={() => setIsOpen(false)}
-                  className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
-                >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span>{item.label}</span>
-                  {item.badge && <span className="nav-badge">{item.badge}</span>}
-                </NavLink>
-              ))}
-            </div>
-          );
-        })}
-      </nav>
+        {/* Navigation */}
+        <nav className="sidebar-nav">
+          {sections.map(section => {
+            const items = navItems.filter(i => i.section === section);
 
-      {/* Footer */}
-      <div className="sidebar-footer">
-        <div className="avatar">A</div>
-        <div className="user-info">
-          <div className="user-name">Admin User</div>
-          <div className="user-role">Super Admin</div>
+            return (
+              <div key={section}>
+                <div className="nav-section-label">{section}</div>
+
+                {items.map(item => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    end={item.path === '/'}
+                    onClick={() => setIsOpen(false)}
+                    className={({ isActive }) =>
+                      `nav-item ${isActive ? 'active' : ''}`
+                    }
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    <span>{item.label}</span>
+
+                    {item.badge && (
+                      <span className="nav-badge">{item.badge}</span>
+                    )}
+                  </NavLink>
+                ))}
+              </div>
+            );
+          })}
+        </nav>
+
+        {/* Footer */}
+        <div className="sidebar-footer">
+          <div className="avatar">A</div>
+          <div className="user-info">
+            <div className="user-name">Admin User</div>
+            <div className="user-role">Super Admin</div>
+          </div>
         </div>
-      </div>
-    </aside>
+
+      </aside>
     </>
   );
 }

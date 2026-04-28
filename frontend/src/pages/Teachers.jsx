@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { teacherAPI } from '../services/api';
-import { useToast } from '../context/ToastContext';
+import { useToast } from '../context/useToast';
 
 const avatarColors = [
   ['#ede9fe','#6d28d9'],['#dbeafe','#1e40af'],['#d1fae5','#065f46'],

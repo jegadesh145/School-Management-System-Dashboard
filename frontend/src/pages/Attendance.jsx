@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { studentAPI, attendanceAPI } from '../services/api';
-import { useToast } from '../context/ToastContext';
+import { useToast } from '../context/useToast';
 
 export default function Attendance() {
   const toast = useToast();
